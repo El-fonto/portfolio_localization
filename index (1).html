@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title class="en">Sergio Fuentes — Translation & Localization Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #181714;
+      --ink-mid:   #4a4740;
+      --ink-soft:  #8a8680;
+      --paper:     #f8f6f1;
+      --cream:     #ede9e0;
+      --rule:      #d5d0c6;
+      --accent:    #2e5c6e;
+      --accent-lt: #e8f0f3;
+      --accent-dk: #1d3d4a;
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-body:    'Jost', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* ── Language toggle logic ── */
+    html.es .en { display: none !important; }
+    html:not(.es) .es { display: none !important; }
+
+    /* ── Language toggle button ── */
+    .lang-toggle {
+      position: fixed;
+      top: 1.2rem;
+      right: 1.4rem;
+      z-index: 100;
+      display: flex;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .lang-toggle button {
+      padding: 0.35rem 0.75rem;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink-soft);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    .lang-toggle button:hover:not(.active) {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    /* ── Layout ── */
+    .page { max-width: 880px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+    /* ── Header ── */
+    header {
+      padding: 4.5rem 0 2.5rem;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: end;
+    }
+    .header-name {
+      font-family: var(--ff-display);
+      font-size: clamp(2.6rem, 6vw, 4.2rem);
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      line-height: 1.05;
+    }
+    .header-name em { font-style: italic; color: var(--accent); }
+    .header-role {
+      font-family: var(--ff-body);
+      font-weight: 400;
+      font-size: 0.85rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      margin-top: 0.7rem;
+    }
+    .header-contact { text-align: right; font-size: 0.83rem; color: var(--ink-soft); line-height: 2; }
+    .header-contact a { color: var(--accent); text-decoration: none; }
+    .header-contact a:hover { text-decoration: underline; }
+
+    /* ── Intro ── */
+    .intro {
+      padding: 2.2rem 0 0;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .intro-text p { font-size: 0.92rem; color: var(--ink-mid); line-height: 1.8; }
+    .tools { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      background: var(--cream);
+      border: 1px solid var(--rule);
+      padding: 0.2rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--ink-mid);
+    }
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+    .stat {
+      background: white;
+      border: 1px solid var(--rule);
+      border-top: 3px solid var(--accent);
+      padding: 0.8rem 1rem;
+    }
+    .stat-num { font-family: var(--ff-display); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; display: block; }
+    .stat-label { font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-top: 0.25rem; display: block; }
+
+    /* ── Sections ── */
+    .section { margin-top: 5rem; }
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .section-num { font-family: var(--ff-display); font-size: 2.8rem; font-weight: 400; color: var(--rule); line-height: 1; flex-shrink: 0; }
+    .section-title { font-family: var(--ff-display); font-size: 1.6rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+
+    /* ── Text ── */
+    .narrative { font-size: 0.92rem; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.2rem; }
+    .pull {
+      border-left: 3px solid var(--accent);
+      padding: 0.9rem 1.5rem;
+      margin: 1.8rem 0;
+      background: var(--accent-lt);
+    }
+    .pull p { font-family: var(--ff-display); font-size: 1.08rem; font-style: italic; color: var(--ink-mid); line-height: 1.65; }
+
+    /* ── Images ── */
+    .img-block { margin: 1.8rem 0; background: white; border: 1px solid var(--rule); overflow: hidden; }
+    .img-block img { display: block; width: 100%; height: auto; }
+    .img-caption { padding: 0.6rem 1rem; font-size: 0.78rem; color: var(--ink-soft); border-top: 1px solid var(--rule); font-style: italic; }
+    .img-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.8rem 0; }
+
+    /* ── Drive CTA ── */
+    .drive-cta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 1.1rem 1.4rem;
+      background: white;
+      border: 1px solid var(--rule);
+      margin-bottom: 0.8rem;
+    }
+    .drive-icon { width: 32px; height: 32px; flex-shrink: 0; opacity: 0.65; }
+    .drive-text { flex: 1; }
+    .drive-text strong { display: block; font-size: 0.85rem; font-weight: 600; color: var(--ink); margin-bottom: 0.1rem; }
+    .drive-text span { font-size: 0.78rem; color: var(--ink-soft); }
+    .drive-link {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      text-decoration: none;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .drive-link:hover { background: var(--accent-dk); }
+
+    /* ── Code ── */
+    .code-block {
+      background: #1a1a1a;
+      color: #ccc;
+      padding: 1.2rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      line-height: 1.75;
+      overflow-x: auto;
+      margin: 1.4rem 0;
+    }
+    .cm { color: #6a9955; }
+    .kw { color: #569cd6; }
+    .st { color: #ce9178; }
+    .nm { color: #9cdcfe; }
+
+    /* ── Pub table ── */
+    .pub-grid { width: 100%; border-collapse: collapse; margin-top: 1.4rem; font-size: 0.88rem; }
+    .pub-grid tr:nth-child(even) { background: white; }
+    .pub-grid tr:nth-child(odd)  { background: var(--cream); }
+    .pub-grid td { padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    .pub-grid td:first-child { font-weight: 600; font-size: 0.77rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-mid); width: 28%; white-space: nowrap; }
+    .pub-grid a { color: var(--accent); text-decoration: none; }
+    .pub-grid a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    header { animation: fadeUp 0.65s ease both; }
+    .intro { animation: fadeUp 0.65s ease 0.1s both; }
+    .section:nth-of-type(1) { animation: fadeUp 0.65s ease 0.15s both; }
+    .section:nth-of-type(2) { animation: fadeUp 0.65s ease 0.25s both; }
+    .section:nth-of-type(3) { animation: fadeUp 0.65s ease 0.35s both; }
+    .section:nth-of-type(4) { animation: fadeUp 0.65s ease 0.45s both; }
+
+    /* ── Responsive ── */
+    @media (max-width: 660px) {
+      header { grid-template-columns: 1fr; }
+      .header-contact { text-align: left; }
+      .intro { grid-template-columns: 1fr; }
+      .img-grid { grid-template-columns: 1fr; }
+      .drive-cta { flex-wrap: wrap; }
+      .lang-toggle { top: 0.8rem; right: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Language toggle ─────────────────────────────────────────────── -->
+<div class="lang-toggle" role="group" aria-label="Language selector">
+  <button id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button id="btn-es" onclick="setLang('es')">ES</button>
+</div>
+
+<div class="page">
+
+  <!-- ── Header ─────────────────────────────────────────────────────── -->
+  <header>
+    <div>
+      <h1 class="header-name">Sergio <em>Fuentes</em></h1>
+      <p class="header-role en">Localization Specialist &nbsp;·&nbsp; EN↔ES Technical &amp; Literary Translation</p>
+      <p class="header-role es">Especialista en Localización &nbsp;·&nbsp; Traducción técnica y literaria EN↔ES</p>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:sergio.d.fuentes.sanchez@gmail.com">sergio.d.fuentes.sanchez@gmail.com</a><br>
+      +52 332 507 2558 &nbsp;·&nbsp; Guadalajara, Mexico
+    </div>
+  </header>
+
+  <!-- ── Intro ──────────────────────────────────────────────────────── -->
+  <div class="intro">
+    <div class="intro-text">
+      <p class="en">
+        Seven years of freelance EN↔ES localization across automotive, medical, and literary
+        domains. Works end-to-end: source analysis, SDL Trados project setup, terminology
+        database management, SME (Subject Matter Expert) review coordination, layout correction in Illustrator,
+        and final delivery. The four projects below represent the full range of that work.
+      </p>
+      <p class="es">
+        Siete años de localización freelance EN↔ES en los sectores automotriz, médico y literario.
+        Traduce en SDL Trados, mantiene bases terminológicas propias, coordina revisiones con
+        expertos del área y corrige la maquetación resultante en Illustrator. Los cuatro proyectos
+        a continuación muestran ese trabajo.
+      </p>
+      <div class="tools">
+        <span class="tag">SDL Trados Studio</span>
+        <span class="tag">Espanso + Python</span>
+        <span class="tag en">Terminology Databases</span>
+        <span class="tag es">Bases terminológicas</span>
+        <span class="tag">Localazy</span>
+        <span class="tag">Adobe Illustrator</span>
+        <span class="tag en">Spanish Native</span>
+        <span class="tag es">Español nativo</span>
+        <span class="tag en">English C2</span>
+        <span class="tag es">Inglés C2</span>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">42</span>
+        <span class="stat-label en">Manuals translated (Honda)</span>
+        <span class="stat-label es">Manuales traducidos (Honda)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">3</span>
+        <span class="stat-label en">Terminology databases</span>
+        <span class="stat-label es">Bases terminológicas</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">800+</span>
+        <span class="stat-label en">Strings localized (Orion)</span>
+        <span class="stat-label es">Cadenas localizadas (Orion)</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">1</span>
+        <span class="stat-label en">Published book (ES→EN)</span>
+        <span class="stat-label es">Libro publicado (ES→EN)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       01 · Honda CHA125
+  ════════════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title en">Honda CHA125 — Technical Localization for a Cross-Border Audience</h2>
+      <h2 class="section-title es">Honda CHA125 — Localización técnica para una audiencia transfronteriza</h2>
+    </div>
+
+    <p class="narrative en">
+      The Honda CHA125 series was commissioned for a specific audience: Hispanic mechanics
+      working in California and in Baja California Norte — Mexicali and Tijuana. The documents
+      needed to be fully self-sufficient in Spanish. The chief mechanic who coordinated the
+      technical review had working familiarity with English but the rest of his team did not have full command of it, which
+      meant every term had to stand on its own without any expectation that a technician
+      would cross-reference the source.
+    </p>
+    <p class="narrative es">
+      La serie Honda CHA125 fue encargada para mecánicos hispanohablantes en California y en Baja
+      California Norte: Mexicali y Tijuana. Los documentos tenían que funcionar solos en español.
+      El jefe de mecánicos que revisó la terminología leía inglés, pero el resto del equipo no tenía la fluidez suficiente para consultar el original mientras trabaja, así que cada término tenía que quedar claro sin esa opción.
+    </p>
+
+    <p class="narrative en">
+      Spanish expands English by roughly 20–25% in technical prose. Across 42 manuals, this produced
+      systematic layout overflow — specification tables, warning callouts, and section headings all
+      exceeded their original frames. After completing the translation in SDL Trados, the layout
+      corrections were applied in Adobe Illustrator, including a full re-pagination of each document.
+      Page numbers shifted throughout to accommodate the longer text while preserving the manual's
+      navigational structure.
+    </p>
+    <p class="narrative es">
+      El español ocupa entre un 20 y 25% más que el inglés en prosa técnica. En 42 manuales, eso
+      se acumula. Tablas de especificaciones, recuadros de advertencia, encabezados: todo rebasó
+      el espacio disponible. Terminada la traducción en Trados, el trabajo continuó en Illustrator:
+      reencuadre de elementos, corrección de texto desbordado y una repaginación completa de cada
+      documento para que los números de página siguieran teniendo sentido.
+    </p>
+
+    <div class="pull">
+      <p class="en">The challenge was fitting the right word, often longer, into a space designed for a shorter one, without losing the precision, and familiarity, a mechanic's safety depends on.</p>
+      <p class="es">El reto no era encontrar la palabra correcta. Era hacerla caber en un espacio diseñado para una más corta, sin perder la precisión de la que depende la seguridad de un mecánico.</p>
+    </div>
+
+    <div class="img-block">
+      <img src="trados-tm.png" alt="SDL Trados Studio Translation Memory showing the Honda project with parallel EN/ES segments" />
+      <p class="img-caption en">
+        SDL Trados Studio — Translation Memory view for the Honda CHA125 series. Two project TMs visible: Motoneta Manual and Scooter Honda.
+      </p>
+      <p class="img-caption es">
+        SDL Trados Studio — vista de Memoria de Traducción para la serie Honda CHA125. Dos TMs de proyecto visibles: Motoneta Manual y Scooter Honda.
+      </p>
+    </div>
+
+    <div class="drive-cta">
+      <svg class="drive-icon" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+        <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+        <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+        <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+        <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+      </svg>
+      <div class="drive-text">
+        <strong class="en">Sample — Source Document (EN)</strong>
+        <strong class="es">Muestra — Documento fuente (EN)</strong>
+        <span>Honda CHA125 3WH/4WH-E Service Manual · 30 pages · PDF</span>
+      </div>
+      <a class="drive-link en" href="https://drive.google.com/file/d/15nMtU3rSEeRysCLPtr7219Gwszvz8SyN/view?usp=drive_link" target="_blank" rel="noopener">View PDF ↗</a>
+      <a class="drive-link es" href="https://drive.google.com/file/d/15nMtU3rSEeRysCLPtr7219Gwszvz8SyN/view?usp=drive_link" target="_blank" rel="noopener">Ver PDF ↗</a>
+    </div>
+
+    <div class="drive-cta">
+      <svg class="drive-icon" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+        <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+        <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z" fill="#00ac47"/>
+        <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+        <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+        <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+        <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 27h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+      </svg>
+      <div class="drive-text">
+        <strong class="en">Sample — Translated Document (ES)</strong>
+        <strong class="es">Muestra — Documento traducido (ES)</strong>
+        <span>Manual de Servicio Honda CHA125 · 30 páginas · PDF</span>
+      </div>
+      <a class="drive-link en" href="https://drive.google.com/file/d/1fB32fsOglNN9IzYqzYADkOatydeH_JhS/view?usp=drive_link" target="_blank" rel="noopener">View PDF ↗</a>
+      <a class="drive-link es" href="https://drive.google.com/file/d/1fB32fsOglNN9IzYqzYADkOatydeH_JhS/view?usp=drive_link" target="_blank" rel="noopener">Ver PDF ↗</a>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       02 · Espanso
+  ════════════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title en">Terminology Management — Espanso (Text Expander) + Python Workflow</h2>
+      <h2 class="section-title es">Gestión terminológica — Espanso (expansor de texto) + flujo de trabajo en Python</h2>
+    </div>
+
+    <p class="narrative en">
+      Maintaining term consistency across 42 manuals — thousands of segment pairs over several
+      months — required more than a static glossary. Espanso, a text expander tool, was
+      configured as a live autocorrection layer running alongside Trados, catching typing
+      errors and terminology inconsistencies before they reached the translation memory.
+      Two language databases run in parallel: one in English, one in Spanish, and they are
+      switched depending on which language is being localized.
+    </p>
+    <p class="narrative es">
+      Mantener la consistencia terminológica en 42 manuales, con miles de pares de segmentos a lo
+      largo de varios meses, requería algo más que un glosario estático. Espanso corre en paralelo
+      con Trados y corrige errores de escritura antes de que lleguen a la memoria de traducción.
+      Hay dos bases: una en inglés y una en español, y se alternan según el idioma del proyecto.
+    </p>
+
+    <p class="narrative en">
+      Both databases are managed through a Python script that pushes new entries directly
+      to the Espanso YAML configuration files. When a term spelling is agreed on, alternative
+      spellings go into the script, which updates the corresponding database in a single run
+      without requiring any manual file editing.
+    </p>
+    <p class="narrative es">
+      Las dos bases las gestiona un script de Python que actualiza los archivos YAML de Espanso
+      directamente. Cuando se fija la ortografía de un término, sus variantes entran al script y
+      la base se actualiza en una sola ejecución. Sin editar archivos a mano.
+    </p>
+
+    <div class="code-block">
+<span class="cm en"># typos_es.yml — common typing errors caught before reaching the TM</span>
+<span class="cm es"># typos_es.yml — errores de escritura capturados antes de llegar a la MT</span>
+<span class="cm en"># Generated and updated by Python script; not edited manually</span>
+<span class="cm es"># Generado y actualizado por script de Python; no se edita manualmente</span>
+<span class="kw">matches</span>:
+  - <span class="nm">trigger</span>: <span class="st">"transmisoin"</span>
+    <span class="nm">replace</span>: <span class="st">"transmisión"</span>
+  - <span class="nm">trigger</span>: <span class="st">"balancin"</span>
+    <span class="nm">replace</span>: <span class="st">"balancín"</span>
+  - <span class="nm">trigger</span>: <span class="st">"ciguenal"</span>
+    <span class="nm">replace</span>: <span class="st">"cigüeñal"</span>
+  - <span class="nm">trigger</span>: <span class="st">"admisoin"</span>
+    <span class="nm">replace</span>: <span class="st">"admisión"</span>
+  - <span class="nm">trigger</span>: <span class="st">"valvula"</span>
+    <span class="nm">replace</span>: <span class="st">"válvula"</span>
+  - <span class="nm">trigger</span>: <span class="st">"especificacion"</span>
+    <span class="nm">replace</span>: <span class="st">"especificación"</span></div>
+
+    <div class="img-grid">
+      <div class="img-block" style="margin:0">
+        <img src="espanso.gif" alt="Espanso autocorrection in action during a live translation session" />
+        <p class="img-caption en">Term expansion databases shown in full.</p>
+        <p class="img-caption es">Bases de expansión de texto mostradas en extenso.</p>
+      </div>
+      <div class="img-block" style="margin:0">
+        <img src="espanso-config.png" alt="Espanso YAML configuration open in NeoVim" />
+        <p class="img-caption en">Python script dedicated to Spanish database entries.</p>
+        <p class="img-caption es">Script de Python dedicado a la incorporación de entradas en español.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       03 · You Are Magic
+  ════════════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title en">You Are Magic — Literary Translation</h2>
+      <h2 class="section-title es">You Are Magic — Traducción literaria</h2>
+    </div>
+
+    <p class="narrative en">
+      The challenge in translating <em>Tú eres la magia</em> began with prosody. Every page in
+      the original Spanish carries internal rhyme that works purposefully, giving the text a
+      rhythm that followed the author's voice. A word-for-word English version would have
+      preserved the meaning, but lost all of the author's intent.
+    </p>
+    <p class="narrative es">
+      El reto de traducir <em>Tú eres la magia</em> empezó con la prosodia. Cada página del
+      original en español tiene rima interna: no es ornamental, es parte de cómo habla la autora.
+      Una versión literal en inglés habría dicho lo mismo, pero no habría sonado igual. En un
+      libro así, el sonido es parte del significado.
+    </p>
+
+    <p class="narrative en">
+      For several passages, the author was consulted directly to establish what each phrase
+      was meant to do — its tone, its emotional register, the image it was meant to leave.
+      Only after that conversation was it possible to attempt an English version that honored
+      those intentions. The sample below shows one such passage: a sequence about the eternal
+      balance game, where the Spanish rhyme scheme had to be rethought in English, not translated.
+    </p>
+    <p class="narrative es">
+      En varios pasajes consulté directamente a la autora para entender qué debía hacer cada
+      frase: no solo el significado, sino el tono y lo que debía dejar en quien lo lee. Con eso
+      fue posible intentar una versión en inglés que funcionara en sus propios términos. La muestra
+      a continuación es uno de esos pasajes: el juego del equilibrio eterno, donde la rima en
+      español tuvo que rehacerse en inglés, no traducirse.
+    </p>
+
+    <div class="img-block">
+      <img src="you-are-magic.png" alt="Annotated side-by-side comparison of You Are Magic in English and Spanish" />
+      <p class="img-caption en">Annotated comparison — EN (left) and ES (right).</p>
+      <p class="img-caption es">Comparación anotada — EN (izquierda) y ES (derecha).</p>
+    </div>
+
+    <table class="pub-grid">
+      <tr>
+        <td class="en">Original title</td>
+        <td class="es">Título original</td>
+        <td><em>Tú eres la magia</em> · Paulina Flores</td>
+      </tr>
+      <tr>
+        <td class="en">Direction</td>
+        <td class="es">Dirección</td>
+        <td>Spanish → English (ES→EN)</td>
+      </tr>
+      <tr>
+        <td class="en">Role</td>
+        <td class="es">Rol</td>
+        <td class="en">Full-book translation and editorial design</td>
+        <td class="es">Traducción completa y diseño editorial</td>
+      </tr>
+      <tr>
+        <td class="en">Published</td>
+        <td class="es">Publicado</td>
+        <td>2022 (independent)</td>
+      </tr>
+      <tr>
+        <td>ISBN</td>
+        <td>978-0578353364</td>
+      </tr>
+      <tr>
+        <td class="en">Verify</td>
+        <td class="es">Verificar</td>
+        <td><a href="https://www.amazon.com/dp/0578353369" target="_blank" rel="noopener">amazon.com/dp/0578353369 ↗</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════
+       04 · Localazy / Orion Browser
+  ════════════════════════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title en">Orion Browser — Open-Source Localization via Localazy</h2>
+      <h2 class="section-title es">Orion Browser — Localización de código abierto vía Localazy</h2>
+    </div>
+
+    <p class="narrative en">
+      Outside of client work, I also contribute to open-source projects. Orion Browser, built by
+      Kagi, is a privacy-focused browser for macOS, iOS, iPadOS, Windows, and Linux. For Latin
+      American Spanish —
+      <code style="font-family:monospace;font-size:0.85em;background:var(--cream);padding:0.1rem 0.35rem">es_419</code>
+      — knowing the language wasn't enough. The strings are technical UI copy for users who know
+      their way around a browser, and that audience notices when a label reads like a translation.
+    </p>
+    <p class="narrative es">
+      Aparte del trabajo con clientes, también contribuyo a proyectos de código abierto. Orion
+      Browser, de Kagi, es un navegador para macOS, iOS, iPadOS, Windows y Linux con enfoque en
+      privacidad. Para el español latinoamericano —
+      <code style="font-family:monospace;font-size:0.85em;background:var(--cream);padding:0.1rem 0.35rem">es_419</code>
+      — no bastaba con conocer el idioma. Las cadenas son de interfaz técnica para usuarios que
+      saben lo que hacen, y eso se nota cuando una etiqueta suena traducida en vez de nativa.
+    </p>
+
+    <p class="narrative en">
+      800+ strings translated and reviewed through Localazy. The project maintainers assigned me
+      Trusted Translator status. In practice, the job is checking Google Translate and DeepL
+      suggestions, accepting what works, and rewriting what's correct in the abstract but sounds
+      off for a Latin American Spanish user — then keeping that consistent across terms that show
+      up on dozens of different screens. Profile and contribution history are public at the link below.
+    </p>
+    <p class="narrative es">
+      Más de 800 cadenas traducidas y revisadas en Localazy. Los responsables del proyecto me
+      asignaron estatus de Traductor de Confianza. En la práctica, el trabajo es revisar las
+      sugerencias de Google Translate y DeepL, aceptar lo que funciona y reescribir lo que es
+      correcto en abstracto pero suena raro para un usuario latinoamericano, manteniendo esa
+      consistencia en los términos que aparecen en decenas de pantallas distintas. El perfil y
+      el historial de contribuciones son públicos.
+    </p>
+
+    <div class="img-grid">
+      <div class="img-block" style="margin:0">
+        <img src="localazy-interface.png" alt="Localazy editor showing EN source and Latin American Spanish target with MT suggestions" />
+        <p class="img-caption en">
+          Localazy editor — EN source vs. es_419 target. Machine translation suggestions
+          from Google Translate and DeepL shown below for evaluation.
+        </p>
+        <p class="img-caption es">
+          Editor de Localazy — fuente EN vs. destino es_419. Sugerencias de traducción automática
+          de Google Translate y DeepL mostradas abajo para evaluación.
+        </p>
+      </div>
+      <div class="img-block" style="margin:0">
+        <img src="localazy-page.png" alt="Localazy project page for Orion Browser showing Latin American Spanish among 30+ active languages" />
+        <p class="img-caption en">
+          Orion Browser on Localazy — Latin American Spanish (es_419) among 30+ active language locales.
+        </p>
+        <p class="img-caption es">
+          Orion Browser en Localazy — español latinoamericano (es_419) entre más de 30 variantes de idioma activas.
+        </p>
+      </div>
+    </div>
+
+    <div class="img-block" style="max-width:500px">
+      <img src="localazy-profile.png" alt="Localazy public profile for Sergio Fuentes — Trusted Translator on Orion Browser" />
+      <p class="img-caption en">Public Localazy profile — Trusted Translator on Orion Browser by Kagi.</p>
+      <p class="img-caption es">Perfil público en Localazy — Traductor de Confianza en Orion Browser de Kagi.</p>
+    </div>
+
+    <div class="drive-cta">
+      <svg style="width:28px;height:28px;flex-shrink:0;opacity:0.6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="#2e5c6e" stroke-width="1.5"/>
+        <path d="M12 2a10 10 0 0 1 0 20M12 2a10 10 0 0 0 0 20M2 12h20" stroke="#2e5c6e" stroke-width="1.5"/>
+        <path d="M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10M12 2c-2.5 3-4 6.5-4 10s1.5 7 4 10" stroke="#2e5c6e" stroke-width="1.5"/>
+      </svg>
+      <div class="drive-text">
+        <strong class="en">Public Localazy Profile — Sergio Fuentes</strong>
+        <strong class="es">Perfil público en Localazy — Sergio Fuentes</strong>
+        <span class="en">Trusted Translator · Orion Browser by Kagi · Latin American Spanish (es_419) · 800+ strings</span>
+        <span class="es">Traductor de Confianza · Orion Browser de Kagi · Español latinoamericano (es_419) · más de 800 cadenas</span>
+      </div>
+      <a class="drive-link en" href="https://localazy.com/u/laotrafuente880" target="_blank" rel="noopener">View Profile ↗</a>
+      <a class="drive-link es" href="https://localazy.com/u/laotrafuente880" target="_blank" rel="noopener">Ver perfil ↗</a>
+    </div>
+  </div>
+
+  <!-- ── Footer ──────────────────────────────────────────────────────── -->
+  <footer>
+    <span>Sergio Fuentes · Guadalajara, Mexico</span>
+    <span>
+      <a href="mailto:sergio.d.fuentes.sanchez@gmail.com">sergio.d.fuentes.sanchez@gmail.com</a>
+      &nbsp;·&nbsp;
+      <span class="en">SDL Trados project files and full terminology databases available on request</span>
+      <span class="es">Archivos de proyecto SDL Trados y bases terminológicas disponibles bajo solicitud</span>
+    </span>
+  </footer>
+
+</div>
+
+<script>
+  function setLang(lang) {
+    const html = document.documentElement;
+    if (lang === 'es') {
+      html.classList.add('es');
+      html.lang = 'es';
+    } else {
+      html.classList.remove('es');
+      html.lang = 'en';
+    }
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+    localStorage.setItem('lang', lang);
+  }
+
+  // Restore saved preference
+  const saved = localStorage.getItem('lang');
+  if (saved === 'es') setLang('es');
+</script>
+
+</body>
+</html>
